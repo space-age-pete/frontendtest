@@ -89,11 +89,6 @@ function leftClick() {
 
 <template>
     <div class="variant-chess-board" @click="leftClick" @click.right="rightClick" ref="boardRef">
-        <template v-for="highlight in flatHighlights">
-            <template v-if="highlight.display">
-                <div class="square-highlight" :style="highlight.style" :class="highlight.class" />
-            </template>
-        </template>
         <div class="file-rank-labels file-letters">
             <template v-for="letter in orderedFileLetters">
                 <span>{{ letter }}</span>
@@ -104,6 +99,11 @@ function leftClick() {
                 <span>{{ number }}</span>
             </template>
         </div>
+        <template v-for="highlight in flatHighlights">
+            <template v-if="highlight.display">
+                <div class="square-highlight" :style="highlight.style" :class="highlight.class" />
+            </template>
+        </template>
     </div>
 </template>
 
@@ -152,6 +152,7 @@ function leftClick() {
     position: absolute;
     display: flex;
     justify-content: space-evenly;
+    pointer-events: none;
     color: #c5d5dc;
 
     :nth-child(2n) {

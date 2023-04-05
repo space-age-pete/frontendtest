@@ -126,52 +126,57 @@ function leftClick() {
     width: 100%;
     height: 100%;
     background-color: var(--light-square-color);
+    color: var(--dark-square-color);
 
     &.dark {
         background-color: var(--dark-square-color);
+        color: var(--light-square-color);
     }
 
     &.red {
         background-color: var(--light-square-red-highlight);
+        color: var(--dark-square-red-highlight);
     }
 
     &.darkred {
         background-color: var(--dark-square-red-highlight);
+        color: var(--light-square-red-highlight);
     }
 
     &.green {
         background-color: var(--light-square-green-highlight);
+        color: var(--dark-square-green-highlight);
     }
 
     &.darkgreen {
         background-color: var(--dark-square-green-highlight);
+        color: var(--light-square-green-highlight);
     }
 
     &.yellow {
         background-color: var(--light-square-yellow-highlight);
+        color: var(--dark-square-yellow-highlight);
     }
 
     &.darkyellow {
         background-color: var(--dark-square-yellow-highlight);
+        color: var(--light-square-yellow-highlight);
     }
 
     &.blue {
         background-color: var(--light-square-blue-highlight);
+        color: var(--dark-square-blue-highlight);
     }
 
     &.darkblue {
         background-color: var(--dark-square-blue-highlight);
+        color: var(--light-square-blue-highlight);
     }
 }
 
 .file-rank-label {
     font-size: 1rem;
     position: absolute;
-    color: var(--dark-square-color);
-
-    &.dark {
-        color: var(--light-square-color);
-    }
 
     &.file-letter {
         right: 5px;
@@ -185,7 +190,6 @@ function leftClick() {
 
     @media (min-width: 960px) {
         font-size: 1.5rem;
-
     }
 }
 </style>
