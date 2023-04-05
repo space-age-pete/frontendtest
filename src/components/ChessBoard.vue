@@ -24,6 +24,7 @@ const unsortedSquares = ref<Square[]>(Array.from({ length: 64 }, (_, index) => {
 
 const sortedSquares = computed<Square[]>(() => {
     return unsortedSquares.value.sort((squareA, squareB) => {
+        // if board is flipped, the array should start with [8,0] aka h1, and end with [0,8] aka a8
         if (props.boardFlipped) {
             if (squareA.rankIndex < squareB.rankIndex) return -1
             if (squareA.rankIndex > squareB.rankIndex) return 1
@@ -32,6 +33,7 @@ const sortedSquares = computed<Square[]>(() => {
             if (squareA.fileIndex > squareB.fileIndex) return -1
 
             else return 0
+            // if board is not flipped, the array should start with [0,8] aka a8, and end with [8,0] aka h1
         } else {
             if (squareA.rankIndex < squareB.rankIndex) return 1
             if (squareA.rankIndex > squareB.rankIndex) return -1
@@ -119,7 +121,6 @@ function leftClick() {
         width: min(90vh, calc(100vw - 400px));
     }
 }
-
 
 .chess-board-square {
     position: relative;

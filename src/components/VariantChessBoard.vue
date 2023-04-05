@@ -51,6 +51,7 @@ function rightClick(event: MouseEvent): void {
 
     const offsetToRankOrFileIndex = (offset: number) => Math.floor(offset / (boardWidth.value / 8))
 
+    // converting the default coordinates of the grid ([0,0] in top right) to standard white pov ([0,0] in bottom left) or black pov ([0,0] in top right)
     const fileIndex = !props.boardFlipped
         ? offsetToRankOrFileIndex(event.offsetX)
         : 7 - offsetToRankOrFileIndex(event.offsetX)
