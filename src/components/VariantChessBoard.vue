@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { fileIndexToFileDisplay, rankIndexToRankDisplay, fileLetters, rankNumbers } from "@/utils";
+import { fileIndexToFileDisplay, rankIndexToRankDisplay, fileLetters, rankNumbers, determineHighlightColor } from "@/utils";
 import { ref, computed, onMounted } from "vue"
 
 const props = defineProps<{
@@ -60,21 +60,8 @@ function rightClick(event: MouseEvent): void {
         : offsetToRankOrFileIndex(event.offsetY)
 
     let currentColor = highlights.value[fileIndex][rankIndex]
-    let updatedColor: SelectedColor | null = null
 
-    if (event.shiftKey && currentColor !== "green") {
-        updatedColor = "green"
-    } else if (event.ctrlKey && currentColor !== "yellow") {
-        updatedColor = "yellow"
-    } else if (event.altKey && currentColor !== "blue") {
-        updatedColor = "blue"
-    } else if (!event.shiftKey && !event.ctrlKey && !event.altKey && currentColor !== "red") {
-        updatedColor = "red"
-    } else {
-        updatedColor = null
-    }
-
-    highlights.value[fileIndex][rankIndex] = updatedColor
+    highlights.value[fileIndex][rankIndex] = determineHighlightColor(event, currentColor)
 
     const coords = fileIndexToFileDisplay(fileIndex) + rankIndexToRankDisplay(rankIndex)
 
@@ -114,7 +101,7 @@ function leftClick() {
     display: block;
     height: min(90vw, 90vh);
     width: min(90vw, 90vh);
-
+    aspect-ratio: 1;
     background-image: var(--board-image);
     background-size: contain;
 

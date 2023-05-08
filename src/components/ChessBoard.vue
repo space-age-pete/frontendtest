@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { fileIndexToFileDisplay, rankIndexToRankDisplay } from "@/utils";
+import { determineHighlightColor, fileIndexToFileDisplay, rankIndexToRankDisplay } from "@/utils";
 import { ref, computed } from "vue"
 
 const props = defineProps<{
@@ -65,18 +65,7 @@ function getSquareClasses(square: Square): string {
 function rightClick(square: Square, event: MouseEvent): void {
     event.preventDefault()
 
-    //determine highlight color based on click type
-    if (event.shiftKey && square.selectedColor !== "green") {
-        square.selectedColor = "green"
-    } else if (event.ctrlKey && square.selectedColor !== "yellow") {
-        square.selectedColor = "yellow"
-    } else if (event.altKey && square.selectedColor !== "blue") {
-        square.selectedColor = "blue"
-    } else if (!event.shiftKey && !event.ctrlKey && !event.altKey && square.selectedColor !== "red") {
-        square.selectedColor = "red"
-    } else {
-        square.selectedColor = null
-    }
+    square.selectedColor = determineHighlightColor(event, square.selectedColor)
 
     emit('squareClick', square.fileDisplay + square.rankDisplay)
 }
@@ -109,9 +98,7 @@ function leftClick() {
     grid-area: 'board';
     position: relative;
     display: grid;
-
     height: min(90vw, 90vh);
-
     aspect-ratio: 1;
     grid-template-rows: repeat(8, 12.5%);
     grid-template-columns: repeat(8, 12.5%);
